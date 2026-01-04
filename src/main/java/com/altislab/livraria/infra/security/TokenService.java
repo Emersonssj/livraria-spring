@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.altislab.livraria.domain.usuario.Usuario;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -12,7 +13,8 @@ import com.auth0.jwt.JWT;
 
 @Service
 public class TokenService {
-    private String secret = "minha_senha_secreta_api"; // Em produção, use variáveis de ambiente
+    @Value("${api.security.token.secret}")
+    private String secret;
 
     public String gerarToken(Usuario usuario){
         try {
