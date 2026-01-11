@@ -49,6 +49,14 @@ public class Livro {
         if (dados.estoque() != null) this.estoque = dados.estoque();
     }
 
+    public void baixarEstoque() {
+        this.estoque--;
+    }
+
+    public void reporEstoque() {
+        this.estoque++;
+    }
+
     public void excluir() {
         this.ativo = false;
     }
