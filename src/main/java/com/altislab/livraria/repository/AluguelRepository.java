@@ -1,6 +1,7 @@
 package com.altislab.livraria.repository;
 
 import com.altislab.livraria.domain.aluguel.Aluguel;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.domain.Pageable;
@@ -34,4 +35,5 @@ public interface AluguelRepository extends JpaRepository<Aluguel, Long> {
     // Agrupa por livro, conta as ocorrências e ordena do maior para o menor
     @Query("SELECT a.livro AS livro, COUNT(a) AS total FROM Aluguel a GROUP BY a.livro ORDER BY total DESC")
     List<LivroMaisAlugadoProjection> encontrarLivrosMaisAlugados(Pageable pageable);
+    Page<Aluguel> findAllByDataDevolucaoRealIsNull(Pageable pageable);
 }

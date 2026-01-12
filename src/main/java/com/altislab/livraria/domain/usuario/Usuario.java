@@ -26,6 +26,9 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
+    @Column(unique = true)
+    private String email;
+
     // O documento cita "Administrador" e usuários comuns[cite: 79].
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -34,6 +37,22 @@ public class Usuario implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

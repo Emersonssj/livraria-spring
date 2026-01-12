@@ -29,7 +29,7 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable()) // Desabilita proteção contra CSRF (essencial para POST funcionar sem token)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    // Tenta liberar de forma mais abrangente para testar
+                    req.requestMatchers("/auth/login", "/auth/forgot-password", "/auth/reset-password").permitAll();
                     req.requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     req.anyRequest().authenticated();
